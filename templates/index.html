@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        25 Words Or Less
+    </title>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="shortcut icon" href="#">
+</head>
+
+<body>
+    {% for word in words %}
+    {{ word }}
+    <br />
+    {% endfor %}
+    <input type="button" value="New words" id="newWordsButton" />
+</body>
+
+<script>
+    $('#newWordsButton').click(function () {
+        let request = $.ajax({
+            url: "/newWords",
+            type: "POST",
+            data: {
+            },
+        });
+
+        request.done(function (response) {
+            window.location.reload();
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            console.error("Request failed: " + textStatus);
+        });
+    });
+
+
+</script>
+
+</html>
